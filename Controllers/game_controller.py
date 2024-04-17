@@ -1,8 +1,8 @@
-from ..model.game_model import QuizGame
+from Models.game import Game
 
 
 def get_all_game(return_objects=False):
-    objects = QuizGame.read()
+    objects = Game.read()
 
     if not return_objects:
         list_of_objects = [
@@ -13,7 +13,7 @@ def get_all_game(return_objects=False):
 
 
 def get_game_with_id(id):
-    return QuizGame.read(id).toJSON()
+    return Game.read(id).toJSON()
 
 
 def save_game(player_id, category_id, difficulty_id, score, remaining_lives, start_time, end_time, id = None):

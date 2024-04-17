@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from base_model import AbstractBaseModel
+from basemodel import AbstractBaseModel
 
 
 class Game(AbstractBaseModel):
