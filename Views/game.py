@@ -1,13 +1,13 @@
 from flask import Blueprint, request
 
-from controllers.game import *
+from Controllers.game_controller import *
 
 game_view = Blueprint('game', __name__, url_prefix='/game')
 
 @game_view.route('/', methods=['GET', 'POST'])
 def list_or_create():
     if request.method == 'GET':
-        return get_all_games()
+        return get_all_game()
     else:
         submitted_data = request.POST
 
