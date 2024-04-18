@@ -1,5 +1,6 @@
 import sqlite3
 from .basemodel import AbstractBaseModel
+from .constant import PATH_TO_DB
 from model import createdb
 
 createdb.databaseSetup()
@@ -15,7 +16,7 @@ class Game(AbstractBaseModel):
         self.date = date
 
     def save(self):
-        with sqlite3.connect("NLG.sqlite") as connection:
+        with sqlite3.connect(PATH_TO_DB) as connection:
             cursor = connection.cursor()
             if self.id_game:
                 query = f"UPDATE {self.TABLE_NAME} SET nb_of_players=?, date=? WHERE id_game=?"
@@ -25,19 +26,23 @@ class Game(AbstractBaseModel):
                 cursor.execute(query, (self.nb_of_players, self.date))
                 # get the newly created record's id
                 id = cursor.execute(f"SELECT MAX(id_game) FROM {self.TABLE_NAME}").fetchone()[0]
-                self.id = id
+                # self.id = id
+                self.id_game = cursor.lastrowid
         connection.commit()
 
     def read(self, id=None):
-        with sqlite3.connect("NLG.sqlite") as connection:
+        with sqlite3.connect(PATH_TO_DB) as connection:
             cursor = connection.cursor()
             if id:
                 query = f"SELECT id_game, nb_of_players, date FROM Game WHERE id_game="+id
                 cursor.execute(query)
                 result = cursor.fetchone()
+                # param1 = result[]
+                # param2 = result[2]
+                # param3 = result[0]
                 game = __class__(id_game=result[0], nb_of_players=result[1], date=result[2])
                 # response = JSONResponse(status=200, content_type="application/json", data=game)
-                return game
+                return game.toJSON2()
             else:
                 query = f"SELECT id_game, nb_of_players, date FROM Game"
                 results = cursor.execute(query).fetchall()
@@ -48,10 +53,10 @@ class Game(AbstractBaseModel):
                 return games
 
     def delete(self):
-        with sqlite3.connect("NLG.sqlite") as connection:
+        with sqlite3.connect(PATH_TO_DB) as connection:
             cursor = connection.cursor()
             if self.id_game:
-                cursor.execute(f"DELETE FROM {self.TABLE_NAME} WHERE id=?", self.id)
+                cursor.execute(f"DELETE FROM {self.TABLE_NAME} WHERE id_game=?", self.id_game)
             else:
                 cursor.execute(f"DELETE FROM {self.TABLE_NAME}")
         self.id_game = None

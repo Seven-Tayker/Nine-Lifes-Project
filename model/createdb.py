@@ -1,14 +1,14 @@
-
 import os
 import sqlite3
+
 
 def databaseSetup():
     DB = os.path.join(os.path.dirname(__file__), "NLG.sqlite")
 
     game_query = "CREATE TABLE IF NOT EXISTS Game (" \
-                 "id_game integer AUTO_INCREMENT PRIMARY KEY," \
+                 "id_game integer PRIMARY KEY, " \
                  "nb_of_players integer, " \
-                "date DATETIME" \
+                 "date DATETIME" \
                  ")"
     player_query = "CREATE TABLE IF NOT EXISTS Player (" \
                    "id_player text PRIMARY KEY," \
@@ -40,11 +40,12 @@ def databaseSetup():
                  "option3 text," \
                  "option4 text," \
                  "correct text," \
-                 "FOREIGN KEY (id_category) REFERENCE Category(id_category)" \
-                 ");"
+                 "FOREIGN KEY (id_category) REFERENCES Category(id_category)" \
+                 ")"
 
     with sqlite3.connect(DB) as connection:
         cursor = connection.cursor()
-        for query in [game_query, player_query, category_query, playerGame_query]:
+        for query in [game_query, player_query, category_query, playerGame_query, quiz_query]:
             cursor.execute(query)
-
+    connection.commit()
+    connection.close()

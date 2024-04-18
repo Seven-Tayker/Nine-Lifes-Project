@@ -13,7 +13,8 @@ def get_all_games():
 
 
 def get_game_with_id(id_game, self=None):
-    return Game.read(self, id=id_game)
+    game = Game.read(self, id=id_game)
+    return game
 
 
 def update_game(id, nb_of_players, date):
