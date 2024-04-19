@@ -68,7 +68,7 @@ def deleteById():
         else:
             return "<center><h3> Enter the Id of the Game to be deleted </h3>"
     else:
-        return "<center><h3> Enter the Id of the Game to be deleted </h3></center>"
+        return "<center><h3> Incorrect Method </h3></center>"
 
 
 @playerGameView.route('/deleteAll', methods=['GET', 'DELETE', 'POST'])

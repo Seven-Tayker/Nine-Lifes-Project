@@ -66,19 +66,19 @@ def deleteById():
         if data['id']:
             gam = get_game_with_id(data['id'])
             if gam:
-                game = delete_game_with_id(data['id'])
-                return "<center><h3> Game with Id :" + data['id'] + " was successfully deleted </h3></center>"
+                delete_game_with_id(data['id'])
+                return "<center><h3>PLayer_Game with Id :" + data['id'] + " was successfully deleted </h3></center>"
             return "<center><h3> Not found </h3></center>"
         else:
             return "<center><h3> Enter the Id of the Game to be deleted </h3>"
     else:
-        return "<center><h3> Enter the Id of the Game to be deleted </h3></center>"
+        return "<center><h3> Incorrect Method </h3></center>"
 
 
 @gameView.route('/deleteAll', methods=['GET', 'DELETE', 'POST'])
 def deleteAll():
     if request.method == 'DELETE':
         delete_all()
-        return "<center><h3> All the Games were deleted successfully </h3></center>"
+        return "<center><h3> All the Player_Games were deleted successfully </h3></center>"
     else:
         return "<center><h3> Incorrect Method </h3></center>"

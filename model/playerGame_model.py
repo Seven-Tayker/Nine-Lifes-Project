@@ -34,7 +34,7 @@ class PlayerGame(AbstractBaseModel):
         with sqlite3.connect(PATH_TO_DB) as connection:
             cursor = connection.cursor()
             if id:
-                query = f"SELECT id_player, id_game date FROM Game WHERE playerGame_id="+id
+                query = f"SELECT playerGame_id, id_player, id_game FROM playerGame WHERE playerGame_id="+id
                 cursor.execute(query)
                 result = cursor.fetchone()
                 # param1 = result[]
