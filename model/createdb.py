@@ -20,7 +20,7 @@ def databaseSetup():
                    "nb_game_won int " \
                    ")"
     category_query = "CREATE TABLE IF NOT EXISTS Category (" \
-                     "id_category int AUTO_INCREMENT PRIMARY KEY," \
+                     "id_category integer PRIMARY KEY," \
                      "category_name text," \
                      "nb_of_questions int" \
                      ")"
@@ -32,7 +32,7 @@ def databaseSetup():
                        "FOREIGN KEY (id_game) REFERENCES Game(id_game)" \
                        ")"
     quiz_query = "CREATE TABLE IF NOT EXISTS Quiz (" \
-                 "id_quiz int AUTO_INCREMENT PRIMARY KEY," \
+                 "id_quiz integer PRIMARY KEY," \
                  "id_category int," \
                  "question text," \
                  "option1 text," \
