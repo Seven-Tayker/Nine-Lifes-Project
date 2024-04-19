@@ -20,19 +20,19 @@ def databaseSetup():
                    "nb_game_won int " \
                    ")"
     category_query = "CREATE TABLE IF NOT EXISTS Category (" \
-                     "id_category int AUTO_INCREMENT PRIMARY KEY," \
+                     "id_category int PRIMARY KEY," \
                      "category_name text," \
                      "nb_of_questions int" \
                      ")"
     playerGame_query = "CREATE TABLE IF NOT EXISTS PlayerGame(" \
-                       "playerGame_id int AUTO_INCREMENT PRIMARY KEY," \
+                       "playerGame_id int PRIMARY KEY," \
                        "id_player text," \
                        "id_game int," \
                        "FOREIGN KEY (id_player) REFERENCES Player(id_player)," \
                        "FOREIGN KEY (id_game) REFERENCES Game(id_game)" \
                        ")"
     quiz_query = "CREATE TABLE IF NOT EXISTS Quiz (" \
-                 "id_quiz int AUTO_INCREMENT PRIMARY KEY," \
+                 "id_quiz int PRIMARY KEY," \
                  "id_category int," \
                  "question text," \
                  "option1 text," \
